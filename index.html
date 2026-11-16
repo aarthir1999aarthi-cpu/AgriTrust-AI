@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriTrust AI | Intelligent Crop Health</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+        <div class="logo">AgriTrust <span>AI</span></div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#detect">Disease Detection</a>
+            <a href="#crops">Crops</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <a href="#detect" class="nav-button">Get Started</a>
+    </header>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <span class="hero-tag">INTELLIGENT AGRICULTURE TECHNOLOGY</span>
+
+            <h1>
+                Protect Your Crops<br>
+                With <span>Artificial Intelligence</span>
+            </h1>
+
+            <p>
+                Detect crop diseases, understand AI predictions
+                and evaluate prediction reliability with AgriTrust AI.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#detect" class="primary-button">
+                    Start Detection
+                </a>
+
+                <a href="#features" class="secondary-button">
+                    Explore Features
+                </a>
+
+            </div>
+
+            <div class="hero-highlights">
+                <div>
+                    <strong>38</strong>
+                    <span>Disease Classes</span>
+                </div>
+
+                <div>
+                    <strong>14</strong>
+                    <span>Crop Types</span>
+                </div>
+
+                <div>
+                    <strong>AI</strong>
+                    <span>Reliability Check</span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features">
+
+        <div class="section-heading">
+            <span>OUR TECHNOLOGY</span>
+            <h2>Smart Farming Starts Here</h2>
+            <p>AI-powered tools designed to support crop health identification.</p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">01</div>
+                <h3>Crop Identification</h3>
+                <p>
+                    Analyse leaf images and identify the most likely
+                    crop disease category.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">02</div>
+                <h3>AI Prediction</h3>
+                <p>
+                    CNN feature extraction and Random Forest
+                    classification work together.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">03</div>
+                <h3>Reliability Detection</h3>
+                <p>
+                    Evaluate prediction confidence and identify
+                    uncertain AI results.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DISEASE DETECTION -->
+    <section class="detection-section" id="detect">
+
+        <div class="section-heading">
+            <span>AI CROP DIAGNOSIS</span>
+            <h2>Crop Disease Detection</h2>
+            <p>Upload a leaf image or capture one using your camera.</p>
+        </div>
+
+
+        <div class="detection-container">
+
+            <!-- UPLOAD CARD -->
+            <div class="detection-card">
+
+                <div class="card-heading">
+                    <span class="step-number">01</span>
+
+                    <div>
+                        <h3>Upload Leaf Image</h3>
+                        <p>Select a JPG or PNG image.</p>
+                    </div>
+                </div>
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/png,image/jpeg"
+                >
+
+            </div>
+
+
+            <!-- CAMERA CARD -->
+            <div class="detection-card">
+
+                <div class="card-heading">
+                    <span class="step-number">02</span>
+
+                    <div>
+                        <h3>Live Camera</h3>
+                        <p>Capture a crop leaf directly.</p>
+                    </div>
+                </div>
+
+                <video id="camera" autoplay playsinline></video>
+
+                <canvas id="canvas" style="display:none;"></canvas>
+
+                <div class="camera-controls">
+
+                    <button
+                        type="button"
+                        id="startCameraBtn"
+                        onclick="startCamera()">
+                        Start Camera
+                    </button>
+
+                    <button
+                        type="button"
+                        id="captureBtn"
+                        onclick="captureImage()"
+                        disabled>
+                        Capture Leaf
+                    </button>
+
+                    <button
+                        type="button"
+                        id="stopCameraBtn"
+                        onclick="stopCamera()"
+                        disabled>
+                        Stop Camera
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PREVIEW -->
+            <div class="preview-card">
+
+                <h3>Selected Leaf Image</h3>
+
+                <p>Review your image before prediction.</p>
+
+                <img id="preview" alt="Selected crop leaf preview">
+
+                <button id="predictBtn" onclick="predictDisease()">
+                    Analyse Crop Image
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+        <div id="loading">
+            Analysing your crop image. Please wait...
+        </div>
+
+
+        <!-- RESULTS -->
+        <div id="result" class="result-box">
+
+            <div class="result-heading">
+                <span>AI ANALYSIS COMPLETE</span>
+                <h2>Prediction Results</h2>
+            </div>
+
+            <div class="result-grid">
+
+                <div class="result-item">
+                    <span>Detected Crop</span>
+                    <strong id="crop"></strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Predicted Disease</span>
+                    <strong id="disease"></strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Model Confidence</span>
+                    <strong id="confidence"></strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Prediction Reliability</span>
+                    <strong id="reliability"></strong>
+                </div>
+
+            </div>
+
+            <p id="message"></p>
+
+            <p id="disclaimer"></p>
+
+        </div>
+
+        <p id="error"></p>
+
+    </section>
+
+
+    <!-- SUPPORTED CROPS -->
+    <section class="crops-section" id="crops">
+
+        <div class="section-heading">
+            <span>MODEL COVERAGE</span>
+            <h2>Supported Crop Categories</h2>
+            <p>Explore the crops included in the current AI dataset.</p>
+        </div>
+
+        <div class="crop-grid">
+
+            <div class="crop-card">Apple</div>
+            <div class="crop-card">Blueberry</div>
+            <div class="crop-card">Cherry</div>
+            <div class="crop-card">Corn</div>
+            <div class="crop-card">Grape</div>
+            <div class="crop-card">Orange</div>
+            <div class="crop-card">Peach</div>
+            <div class="crop-card">Bell Pepper</div>
+            <div class="crop-card">Potato</div>
+            <div class="crop-card">Raspberry</div>
+            <div class="crop-card">Soybean</div>
+            <div class="crop-card">Squash</div>
+            <div class="crop-card">Strawberry</div>
+            <div class="crop-card">Tomato</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+
+        <div class="about-content">
+
+            <span>ABOUT THE PROJECT</span>
+
+            <h2>Building Trust in AI-Based Agriculture</h2>
+
+            <p>
+                AgriTrust AI is an intelligent crop disease identification
+                project combining Convolutional Neural Networks and
+                Random Forest classification.
+            </p>
+
+            <p>
+                Its self-reliability detection feature evaluates model
+                confidence to identify uncertain predictions.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">AgriTrust AI</div>
+
+        <p>
+            Intelligent Crop Disease Prediction with AI Self-Reliability Detection
+        </p>
+
+        <p class="copyright">
+            &copy; 2026 AgriTrust AI. Academic Mini Project.
+        </p>
+
+    </footer>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
