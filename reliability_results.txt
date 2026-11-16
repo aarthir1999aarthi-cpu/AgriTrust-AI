@@ -1,0 +1,8 @@
+AGRITRUST AI - SELF RELIABILITY DETECTION
+==================================================
+Overall Test Accuracy: 92.30%
+Confidence Threshold: 0.3350
+Accepted Predictions: 7658
+Uncertain Predictions: 521
+Coverage: 93.63%
+Accepted Prediction Accuracy: 95.08%

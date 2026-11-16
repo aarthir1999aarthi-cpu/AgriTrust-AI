@@ -1,0 +1,10 @@
+{
+    "model": "CNN",
+    "total_classes": 38,
+    "total_test_images": 8179,
+    "test_accuracy": 0.8910624770754371,
+    "test_loss": 0.3432987928390503,
+    "precision": 0.8955634810247087,
+    "recall": 0.8910624770754371,
+    "f1_score": 0.8902606298486242
+}

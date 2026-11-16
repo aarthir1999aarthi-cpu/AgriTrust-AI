@@ -1,0 +1,28 @@
+AGRITRUST AI - MODEL PERFORMANCE COMPARISON
+=======================================================
+
+MODEL: CNN
+-----------------------------------
+Accuracy  : 89.11%
+Precision : 89.56%
+Recall    : 89.11%
+F1 Score  : 89.03%
+
+MODEL: Decision Tree
+-----------------------------------
+Accuracy  : 82.54%
+Precision : 82.74%
+Recall    : 82.54%
+F1 Score  : 82.60%
+
+MODEL: Random Forest
+-----------------------------------
+Accuracy  : 92.30%
+Precision : 92.22%
+Recall    : 92.30%
+F1 Score  : 92.20%
+
+=======================================================
+BEST MODEL: Random Forest
+TEST ACCURACY: 92.30%
+=======================================================

@@ -1,0 +1,28 @@
+AGRITRUST AI - SHAP EXPLAINABILITY REPORT
+=======================================================
+
+Model: Random Forest
+Input: 128 CNN-extracted features
+Explained test samples: 50
+
+TOP 15 IMPORTANT CNN FEATURES
+----------------------------------------
+1. CNN Feature 120: 0.00393885
+2. CNN Feature 35: 0.00377933
+3. CNN Feature 73: 0.00317540
+4. CNN Feature 113: 0.00309425
+5. CNN Feature 79: 0.00274881
+6. CNN Feature 90: 0.00270494
+7. CNN Feature 32: 0.00267371
+8. CNN Feature 122: 0.00267345
+9. CNN Feature 76: 0.00255941
+10. CNN Feature 84: 0.00249915
+11. CNN Feature 85: 0.00248664
+12. CNN Feature 127: 0.00238232
+13. CNN Feature 37: 0.00236444
+14. CNN Feature 124: 0.00234078
+15. CNN Feature 47: 0.00232528
+
+INTERPRETATION NOTE
+SHAP values describe how CNN feature dimensions influence Random Forest predictions.
+These feature dimensions do not directly identify specific leaf pixels or disease symptoms.
