@@ -1,0 +1,761 @@
+/* ==========================================
+   AGRITRUST AI - COMPLETE PREMIUM DESIGN
+========================================== */
+
+:root {
+    --forest: #123b2a;
+    --green: #287348;
+    --leaf: #62a875;
+    --lime: #c5e99c;
+    --cream: #f7f8f1;
+    --white: #ffffff;
+    --text: #24372c;
+    --muted: #718075;
+    --shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+header {
+    width: 100%;
+    min-height: 78px;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.97);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.06);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--forest);
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--leaf);
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #526258;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+.nav-button {
+    text-decoration: none;
+    background: var(--green);
+    color: white;
+    padding: 11px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    background: var(--forest);
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+   HOME - HERO BACKGROUND
+========================================== */
+
+.hero {
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+    padding: 90px 9%;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 37, 22, 0.94),
+            rgba(10, 49, 29, 0.78),
+            rgba(10, 49, 29, 0.20)
+        ),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=85");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 720px;
+    color: white;
+    animation: fadeUp 1s ease;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 30px;
+    color: #d7f0c8;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 66px);
+    line-height: 1.13;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: #b9e58d;
+}
+
+.hero-content > p {
+    max-width: 580px;
+    font-size: 17px;
+    color: #e0e9df;
+    margin-bottom: 32px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.primary-button,
+.secondary-button {
+    text-decoration: none;
+    padding: 14px 27px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.primary-button {
+    background: #b6df8f;
+    color: var(--forest);
+}
+
+.primary-button:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+.secondary-button {
+    border: 1px solid rgba(255,255,255,0.7);
+    color: white;
+}
+
+.secondary-button:hover {
+    background: white;
+    color: var(--forest);
+}
+
+.hero-highlights {
+    display: flex;
+    gap: 55px;
+    margin-top: 65px;
+    flex-wrap: wrap;
+}
+
+.hero-highlights div {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-highlights strong {
+    font-size: 29px;
+    color: #c4eb9e;
+}
+
+.hero-highlights span {
+    font-size: 12px;
+    color: #e0e9df;
+}
+
+/* ==========================================
+   COMMON SECTION STYLING
+========================================== */
+
+section:not(.hero) {
+    padding: 90px 8%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.section-heading > span,
+.about-content > span {
+    color: #c5e9a9;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    font-size: 36px;
+    color: white;
+    margin: 10px 0;
+}
+
+.section-heading p {
+    color: #edf3e9;
+    font-size: 15px;
+}
+
+/* ==========================================
+   FEATURES - CROP FIELD BACKGROUND
+========================================== */
+
+.features-section {
+    background:
+        linear-gradient(
+            rgba(8, 39, 24, 0.82),
+            rgba(8, 39, 24, 0.82)
+        ),
+        url("https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: 0.35s;
+    box-shadow: var(--shadow);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    background: #e5f2dd;
+    color: var(--green);
+    border-radius: 12px;
+    font-weight: 800;
+    margin-bottom: 22px;
+}
+
+.feature-card h3 {
+    color: var(--forest);
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ==========================================
+   DETECTION - GREENHOUSE BACKGROUND
+========================================== */
+
+.detection-section {
+    background:
+        linear-gradient(
+            rgba(9, 43, 27, 0.83),
+            rgba(9, 43, 27, 0.83)
+        ),
+        url("https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.detection-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.detection-card,
+.preview-card {
+    background: rgba(255,255,255,0.97);
+    padding: 30px;
+    border-radius: 17px;
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: var(--shadow);
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.step-number {
+    min-width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #e4f2dc;
+    color: var(--green);
+    font-weight: 800;
+}
+
+.card-heading h3,
+.preview-card h3 {
+    color: var(--forest);
+    font-size: 19px;
+}
+
+.card-heading p,
+.preview-card > p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* UPLOAD */
+
+input[type="file"] {
+    width: 100%;
+    padding: 18px;
+    border: 2px dashed #a9c9a5;
+    border-radius: 10px;
+    background: #f8fbf5;
+    cursor: pointer;
+    color: var(--text);
+}
+
+/* CAMERA */
+
+#camera {
+    width: 100%;
+    min-height: 220px;
+    max-height: 300px;
+    object-fit: cover;
+    background: #172b20;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.camera-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.camera-controls button {
+    flex: 1;
+    min-width: 95px;
+    padding: 11px 8px;
+    border: none;
+    border-radius: 7px;
+    background: var(--green);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.camera-controls button:hover {
+    background: var(--forest);
+}
+
+.camera-controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* PREVIEW */
+
+.preview-card {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+#preview {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    max-height: 280px;
+    object-fit: contain;
+    margin: 25px auto;
+    border-radius: 12px;
+}
+
+#preview:not([src]),
+#preview[src=""] {
+    display: none;
+}
+
+#predictBtn {
+    background: var(--forest);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#predictBtn:hover {
+    background: var(--green);
+    transform: translateY(-2px);
+}
+
+/* LOADING AND ERROR */
+
+#loading {
+    display: none;
+    text-align: center;
+    margin: 25px auto;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+#error {
+    text-align: center;
+    color: #ffd4ce;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* ==========================================
+   AI PREDICTION RESULTS
+========================================== */
+
+.result-box {
+    display: none;
+    max-width: 1000px;
+    margin: 40px auto 0;
+    padding: 35px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.98);
+    box-shadow: var(--shadow);
+}
+
+.result-heading {
+    margin-bottom: 25px;
+}
+
+.result-heading span {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.result-heading h2 {
+    color: var(--forest);
+    font-size: 28px;
+    margin-top: 5px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.result-item {
+    background: #f4f8f0;
+    padding: 22px;
+    border-radius: 10px;
+    border-left: 4px solid var(--leaf);
+}
+
+.result-item span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.result-item strong {
+    color: var(--forest);
+    font-size: 19px;
+}
+
+#message,
+#disclaimer {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ==========================================
+   SUPPORTED CROPS - VEGETABLE MARKET IMAGE
+========================================== */
+
+.crops-section {
+    background:
+        linear-gradient(
+            rgba(10, 39, 25, 0.78),
+            rgba(10, 39, 25, 0.78)
+        ),
+        url("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.crop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.crop-card {
+    background: rgba(255,255,255,0.94);
+    border-radius: 12px;
+    padding: 23px 12px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--forest);
+    transition: 0.3s;
+}
+
+.crop-card:hover {
+    background: #c5e99c;
+    color: var(--forest);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+}
+
+/* ==========================================
+   ABOUT - FARMER AND FIELD BACKGROUND
+========================================== */
+
+.about-section {
+    background:
+        linear-gradient(
+            rgba(8, 38, 24, 0.82),
+            rgba(8, 38, 24, 0.82)
+        ),
+        url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.about-content {
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+}
+
+.about-content > span {
+    color: #c5e9a9;
+}
+
+.about-content h2 {
+    color: white;
+    font-size: 36px;
+    margin: 15px 0 22px;
+}
+
+.about-content p {
+    color: #e0ebdf;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    background: #0d2d20;
+    color: white;
+    text-align: center;
+    padding: 38px 20px;
+}
+
+.footer-logo {
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+footer p {
+    color: #c3d2c5;
+    font-size: 13px;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 11px;
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card,
+.crop-card,
+.detection-card,
+.preview-card {
+    animation: fadeUp 0.7s ease both;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 900px) {
+
+    header {
+        padding: 15px 4%;
+    }
+
+    nav {
+        gap: 13px;
+    }
+
+    .hero {
+        padding: 75px 6%;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .crop-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        padding: 8px 0;
+    }
+
+    nav a {
+        white-space: nowrap;
+    }
+
+    .nav-button {
+        padding: 9px 14px;
+    }
+
+    .hero {
+        min-height: 570px;
+        padding: 65px 7%;
+    }
+
+    .hero-highlights {
+        gap: 25px;
+        margin-top: 40px;
+    }
+
+    section:not(.hero) {
+        padding: 65px 6%;
+    }
+
+    .section-heading h2 {
+        font-size: 28px;
+    }
+
+    .feature-grid,
+    .detection-container,
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-card {
+        grid-column: auto;
+    }
+
+    .crop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-content h2 {
+        font-size: 28px;
+    }
+
+    .features-section,
+    .detection-section,
+    .crops-section,
+    .about-section {
+        background-attachment: scroll;
+    }
+}
