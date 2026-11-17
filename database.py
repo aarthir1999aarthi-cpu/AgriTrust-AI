@@ -2,26 +2,16 @@ import sqlite3
 import os
 
 # DATABASE PATH
-
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DATABASE_DIR = os.path.join(BASE_DIR, "database")
-
-# Automatically create database folder
 os.makedirs(DATABASE_DIR, exist_ok=True)
 
-DATABASE_PATH = os.path.join(
-    DATABASE_DIR,
-    "prediction_history.db"
-)
+DATABASE_PATH = os.path.join(DATABASE_DIR, "prediction_history.db")
 
 
 # CREATE DATABASE
-
 def create_database():
-
     connection = sqlite3.connect(DATABASE_PATH)
     cursor = connection.cursor()
 
@@ -41,9 +31,7 @@ def create_database():
 
 
 # SAVE PREDICTION
-
 def save_prediction(crop, disease, confidence, reliability):
-
     connection = sqlite3.connect(DATABASE_PATH)
     cursor = connection.cursor()
 
@@ -58,9 +46,7 @@ def save_prediction(crop, disease, confidence, reliability):
 
 
 # GET PREDICTION HISTORY
-
 def get_prediction_history():
-
     connection = sqlite3.connect(DATABASE_PATH)
     connection.row_factory = sqlite3.Row
 
@@ -73,14 +59,12 @@ def get_prediction_history():
     """)
 
     records = [dict(row) for row in cursor.fetchall()]
-
     connection.close()
 
     return records
 
 
 # INITIALIZE DATABASE
-
 create_database()
 
 print("Prediction History Database Ready!")
