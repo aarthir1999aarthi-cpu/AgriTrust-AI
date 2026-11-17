@@ -1,4 +1,3 @@
-```python
 import os
 import sys
 import json
@@ -16,7 +15,6 @@ from PIL import Image
 # 1. PROJECT PATH
 # ==================================================
 
-# app.py is located in the repository root
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 sys.path.insert(0, BASE_DIR)
@@ -28,7 +26,7 @@ from database import (
 
 
 # ==================================================
-# 2. PATHS
+# 2. PROJECT PATHS
 # ==================================================
 
 MODEL_DIR = os.path.join(BASE_DIR, "models")
@@ -37,15 +35,18 @@ FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 CNN_MODEL_PATH = os.path.join(
-    RESULTS_DIR, "agrTrust_cnn_model.keras"
+    RESULTS_DIR,
+    "agrTrust_cnn_model.keras"
 )
 
 RF_MODEL_PATH = os.path.join(
-    MODEL_DIR, "random_forest_model.joblib"
+    MODEL_DIR,
+    "random_forest_model.joblib"
 )
 
 CLASS_NAMES_PATH = os.path.join(
-    RESULTS_DIR, "class_names.json"
+    RESULTS_DIR,
+    "class_names.json"
 )
 
 CONFIDENCE_THRESHOLD = 0.335
@@ -67,9 +68,11 @@ required_files = [
 ]
 
 for file_path in required_files:
+
     if not os.path.isfile(file_path):
+
         raise FileNotFoundError(
-            f"Required project file not found: {file_path}"
+            f"Required file not found: {file_path}"
         )
 
 
@@ -99,7 +102,6 @@ cnn_model = tf.keras.models.load_model(
     compile=False
 )
 
-# Initialize CNN model
 cnn_model(
     tf.zeros((1, 224, 224, 3)),
     training=False
@@ -113,17 +115,19 @@ feature_extractor = tf.keras.Model(
 rf_model = joblib.load(RF_MODEL_PATH)
 
 with open(CLASS_NAMES_PATH, "r", encoding="utf-8") as file:
+
     class_names = json.load(file)
 
 if len(class_names) != len(rf_model.classes_):
+
     raise ValueError(
         "Class names and Random Forest classes do not match."
     )
 
 if feature_extractor.output_shape[-1] != 128:
+
     raise ValueError(
-        f"Expected 128 CNN features, "
-        f"received {feature_extractor.output_shape[-1]}"
+        "CNN feature dimensions must be 128."
     )
 
 print("CNN model loaded successfully!")
@@ -151,12 +155,16 @@ def get_top_predictions(probabilities):
         crop_name, disease_name = class_name.split("___", 1)
 
         top_predictions.append({
+
             "crop": crop_name.replace("_", " "),
+
             "disease": disease_name.replace("_", " "),
+
             "confidence": round(
                 float(probabilities[position]) * 100,
                 2
             )
+
         })
 
     return top_predictions
@@ -182,10 +190,15 @@ def home():
 def health():
 
     return jsonify({
+
         "success": True,
+
         "message": "AgriTrust AI server is running",
+
         "total_classes": len(class_names),
+
         "feature_dimensions": 128
+
     })
 
 
@@ -224,9 +237,12 @@ def preprocess_image(image_file):
 def allowed_file(filename):
 
     return (
+
         "." in filename
+
         and filename.rsplit(".", 1)[1].lower()
         in ALLOWED_EXTENSIONS
+
     )
 
 
@@ -242,8 +258,11 @@ def predict():
         if "file" not in request.files:
 
             return jsonify({
+
                 "success": False,
+
                 "error": "No image uploaded."
+
             }), 400
 
         file = request.files["file"]
@@ -251,21 +270,29 @@ def predict():
         if file.filename == "":
 
             return jsonify({
+
                 "success": False,
+
                 "error": "Please select an image."
+
             }), 400
 
         if not allowed_file(file.filename):
 
             return jsonify({
+
                 "success": False,
+
                 "error": "Only JPG, JPEG and PNG images are allowed."
+
             }), 400
 
         # IMAGE PREPROCESSING
+
         processed_image = preprocess_image(file)
 
         # CNN FEATURE EXTRACTION
+
         features = feature_extractor.predict(
             processed_image,
             verbose=0
@@ -278,12 +305,15 @@ def predict():
             )
 
         # RANDOM FOREST PREDICTION
+
         probabilities = rf_model.predict_proba(features)[0]
 
         # TOP-3 PREDICTIONS
+
         top_predictions = get_top_predictions(probabilities)
 
         # BEST PREDICTION
+
         prediction_position = int(
             np.argmax(probabilities)
         )
@@ -310,6 +340,7 @@ def predict():
         )
 
         # RELIABILITY DETECTION
+
         if confidence >= CONFIDENCE_THRESHOLD:
 
             reliability = "RELIABLE"
@@ -330,6 +361,7 @@ def predict():
             )
 
         # SAVE PREDICTION
+
         save_prediction(
             crop_display,
             disease_display,
@@ -338,6 +370,7 @@ def predict():
         )
 
         # RESPONSE
+
         return jsonify({
 
             "success": True,
@@ -433,13 +466,15 @@ def file_too_large(error):
 
 
 # ==================================================
-# 14. START SERVER (LOCAL TESTING)
+# 14. START SERVER
 # ==================================================
 
 if __name__ == "__main__":
 
     print("\n====================================")
+
     print("AGRITRUST AI SERVER STARTING")
+
     print("====================================")
 
     app.run(
@@ -447,4 +482,3 @@ if __name__ == "__main__":
         port=int(os.environ.get("PORT", 10000)),
         debug=False
     )
-```
