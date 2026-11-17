@@ -1,3 +1,4 @@
+```python
 import os
 import sys
 import json
@@ -15,17 +16,16 @@ from PIL import Image
 # 1. PROJECT PATH
 # ==================================================
 
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
+# app.py is located in the repository root
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Add project root to Python path
 sys.path.insert(0, BASE_DIR)
 
 from database import (
     save_prediction,
     get_prediction_history
 )
+
 
 # ==================================================
 # 2. PATHS
@@ -56,7 +56,25 @@ MAX_FILE_SIZE = 10 * 1024 * 1024
 
 
 # ==================================================
-# 3. FLASK APPLICATION
+# 3. CHECK REQUIRED FILES
+# ==================================================
+
+required_files = [
+    CNN_MODEL_PATH,
+    RF_MODEL_PATH,
+    CLASS_NAMES_PATH,
+    os.path.join(FRONTEND_DIR, "index.html")
+]
+
+for file_path in required_files:
+    if not os.path.isfile(file_path):
+        raise FileNotFoundError(
+            f"Required project file not found: {file_path}"
+        )
+
+
+# ==================================================
+# 4. FLASK APPLICATION
 # ==================================================
 
 app = Flask(
@@ -69,7 +87,7 @@ app.config["MAX_CONTENT_LENGTH"] = MAX_FILE_SIZE
 
 
 # ==================================================
-# 4. LOAD AI MODELS
+# 5. LOAD AI MODELS
 # ==================================================
 
 print("\n====================================")
@@ -81,6 +99,7 @@ cnn_model = tf.keras.models.load_model(
     compile=False
 )
 
+# Initialize CNN model
 cnn_model(
     tf.zeros((1, 224, 224, 3)),
     training=False
@@ -93,7 +112,7 @@ feature_extractor = tf.keras.Model(
 
 rf_model = joblib.load(RF_MODEL_PATH)
 
-with open(CLASS_NAMES_PATH, "r") as file:
+with open(CLASS_NAMES_PATH, "r", encoding="utf-8") as file:
     class_names = json.load(file)
 
 if len(class_names) != len(rf_model.classes_):
@@ -101,13 +120,20 @@ if len(class_names) != len(rf_model.classes_):
         "Class names and Random Forest classes do not match."
     )
 
+if feature_extractor.output_shape[-1] != 128:
+    raise ValueError(
+        f"Expected 128 CNN features, "
+        f"received {feature_extractor.output_shape[-1]}"
+    )
+
 print("CNN model loaded successfully!")
 print("Random Forest model loaded successfully!")
 print("Total classes:", len(class_names))
+print("Feature dimensions: 128")
 
 
 # ==================================================
-# 5. TOP-3 PREDICTIONS
+# 6. TOP-3 PREDICTIONS
 # ==================================================
 
 def get_top_predictions(probabilities):
@@ -137,7 +163,7 @@ def get_top_predictions(probabilities):
 
 
 # ==================================================
-# 6. HOME PAGE
+# 7. HOME PAGE
 # ==================================================
 
 @app.route("/")
@@ -149,7 +175,7 @@ def home():
 
 
 # ==================================================
-# 7. HEALTH CHECK
+# 8. HEALTH CHECK
 # ==================================================
 
 @app.route("/health", methods=["GET"])
@@ -164,7 +190,7 @@ def health():
 
 
 # ==================================================
-# 8. IMAGE PREPROCESSING
+# 9. IMAGE PREPROCESSING
 # ==================================================
 
 def preprocess_image(image_file):
@@ -192,7 +218,7 @@ def preprocess_image(image_file):
 
 
 # ==================================================
-# 9. FILE VALIDATION
+# 10. FILE VALIDATION
 # ==================================================
 
 def allowed_file(filename):
@@ -205,7 +231,7 @@ def allowed_file(filename):
 
 
 # ==================================================
-# 10. DISEASE PREDICTION
+# 11. DISEASE PREDICTION
 # ==================================================
 
 @app.route("/predict", methods=["POST"])
@@ -237,11 +263,9 @@ def predict():
             }), 400
 
         # IMAGE PREPROCESSING
-
         processed_image = preprocess_image(file)
 
         # CNN FEATURE EXTRACTION
-
         features = feature_extractor.predict(
             processed_image,
             verbose=0
@@ -254,15 +278,12 @@ def predict():
             )
 
         # RANDOM FOREST PREDICTION
-
         probabilities = rf_model.predict_proba(features)[0]
 
         # TOP-3 PREDICTIONS
-
         top_predictions = get_top_predictions(probabilities)
 
         # BEST PREDICTION
-
         prediction_position = int(
             np.argmax(probabilities)
         )
@@ -289,7 +310,6 @@ def predict():
         )
 
         # RELIABILITY DETECTION
-
         if confidence >= CONFIDENCE_THRESHOLD:
 
             reliability = "RELIABLE"
@@ -310,7 +330,6 @@ def predict():
             )
 
         # SAVE PREDICTION
-
         save_prediction(
             crop_display,
             disease_display,
@@ -319,7 +338,6 @@ def predict():
         )
 
         # RESPONSE
-
         return jsonify({
 
             "success": True,
@@ -365,7 +383,7 @@ def predict():
 
 
 # ==================================================
-# 11. PREDICTION HISTORY API
+# 12. PREDICTION HISTORY API
 # ==================================================
 
 @app.route("/history", methods=["GET"])
@@ -385,7 +403,7 @@ def prediction_history():
 
         })
 
-    except Exception as error:
+    except Exception:
 
         traceback.print_exc()
 
@@ -393,13 +411,13 @@ def prediction_history():
 
             "success": False,
 
-            "error": str(error)
+            "error": "Unable to retrieve prediction history."
 
         }), 500
 
 
 # ==================================================
-# 12. FILE SIZE ERROR
+# 13. FILE SIZE ERROR
 # ==================================================
 
 @app.errorhandler(413)
@@ -415,7 +433,7 @@ def file_too_large(error):
 
 
 # ==================================================
-# 13. START SERVER
+# 14. START SERVER (LOCAL TESTING)
 # ==================================================
 
 if __name__ == "__main__":
@@ -424,8 +442,9 @@ if __name__ == "__main__":
     print("AGRITRUST AI SERVER STARTING")
     print("====================================")
 
-   app.run(
-    host="0.0.0.0",
-    port=int(os.environ.get("PORT", 10000)),
-    debug=False
-)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 10000)),
+        debug=False
+    )
+```
