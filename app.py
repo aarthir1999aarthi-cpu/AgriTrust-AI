@@ -22,11 +22,10 @@ BASE_DIR = os.path.dirname(
 # Add project root to Python path
 sys.path.insert(0, BASE_DIR)
 
-from database.database import (
+from database import (
     save_prediction,
     get_prediction_history
 )
-
 
 # ==================================================
 # 2. PATHS
