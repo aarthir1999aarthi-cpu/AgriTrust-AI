@@ -84,4 +84,3 @@ def get_prediction_history():
 create_database()
 
 print("Prediction History Database Ready!")
-```
