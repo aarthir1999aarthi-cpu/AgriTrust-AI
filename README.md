@@ -51,5 +51,28 @@ Live Application
 Deployment URL: To be updated.
 
 Conclusion
+## Dataset Information
 
+**Dataset Name:** PlantVillage
+
+**Dataset Source:**
+https://github.com/spMohanty/PlantVillage-Dataset
+
+**Dataset Type:** Plant Leaf Images
+
+**Dataset Size:** Approximately 54,000 images (verify actual count in your downloaded dataset).
+
+**Dataset Usage:**
+- Image preprocessing
+- Plant disease classification
+- CNN model training
+- Model evaluation
+
+## Dataset Download Instructions
+
+1. Visit the PlantVillage dataset repository.
+2. Download the dataset.
+3. Extract the downloaded files.
+4. Place the images in the project dataset folder.
+5. Run the preprocessing scripts.
 AgriTrust AI demonstrates the application of Artificial Intelligence and Machine Learning in addressing agricultural challenges.
