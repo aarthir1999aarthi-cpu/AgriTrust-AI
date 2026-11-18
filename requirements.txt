@@ -1,13 +1,7 @@
 streamlit
-numpy
+tensorflow==2.20.0
+scikit-learn==1.9.1
+numpy==2.5.4
 pandas
-scikit-learn
-tensorflow
-opencv-python
 Pillow
-matplotlib
-seaborn
 joblib
-shap
-gunicorn
-Flask

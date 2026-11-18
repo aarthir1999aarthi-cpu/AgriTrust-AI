@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+venv/
+venv_tf/
+.env
+database/*.db
